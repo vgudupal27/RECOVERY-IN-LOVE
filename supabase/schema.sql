@@ -158,3 +158,119 @@ alter table public.moderation_evidence enable row level security;
 alter table public.audit_logs enable row level security;
 
 -- RLS policies will be added together with Supabase Auth once auth wiring begins.
+
+
+-- Auth-linked profile policies
+-- Run this schema in the Supabase SQL editor.
+
+alter table public.profiles
+  add constraint profiles_auth_user_fk
+  foreign key (id) references auth.users(id) on delete cascade;
+
+create policy "profiles_select_authenticated"
+on public.profiles for select
+to authenticated
+using (true);
+
+create policy "profiles_insert_self"
+on public.profiles for insert
+to authenticated
+with check (auth.uid() = id);
+
+create policy "profiles_update_self"
+on public.profiles for update
+to authenticated
+using (auth.uid() = id)
+with check (auth.uid() = id);
+
+create policy "preferences_self"
+on public.preferences for all
+to authenticated
+using (auth.uid() = user_id)
+with check (auth.uid() = user_id);
+
+create policy "recovery_profiles_self"
+on public.recovery_profiles for all
+to authenticated
+using (auth.uid() = user_id)
+with check (auth.uid() = user_id);
+
+create policy "mental_health_profiles_self"
+on public.mental_health_profiles for all
+to authenticated
+using (auth.uid() = user_id)
+with check (auth.uid() = user_id);
+
+create policy "assessment_results_self"
+on public.assessment_results for all
+to authenticated
+using (auth.uid() = user_id)
+with check (auth.uid() = user_id);
+
+create policy "likes_insert_self"
+on public.likes for insert
+to authenticated
+with check (auth.uid() = from_user_id);
+
+create policy "likes_select_related"
+on public.likes for select
+to authenticated
+using (auth.uid() = from_user_id or auth.uid() = to_user_id);
+
+create policy "matches_select_related"
+on public.matches for select
+to authenticated
+using (auth.uid() = user_a or auth.uid() = user_b);
+
+create policy "messages_select_if_participant"
+on public.messages for select
+to authenticated
+using (
+  exists (
+    select 1
+    from public.conversations c
+    join public.matches m on m.id = c.match_id
+    where c.id = messages.conversation_id
+      and (m.user_a = auth.uid() or m.user_b = auth.uid())
+  )
+);
+
+create policy "messages_insert_if_participant"
+on public.messages for insert
+to authenticated
+with check (
+  auth.uid() = sender_id
+  and exists (
+    select 1
+    from public.conversations c
+    join public.matches m on m.id = c.match_id
+    where c.id = messages.conversation_id
+      and (m.user_a = auth.uid() or m.user_b = auth.uid())
+  )
+);
+
+create policy "blocks_self"
+on public.blocks for all
+to authenticated
+using (auth.uid() = blocker_id)
+with check (auth.uid() = blocker_id);
+
+create policy "reports_insert_self"
+on public.reports for insert
+to authenticated
+with check (auth.uid() = reporter_id);
+
+create policy "reports_select_self"
+on public.reports for select
+to authenticated
+using (auth.uid() = reporter_id);
+
+create policy "relationship_verifications_related"
+on public.relationship_verifications for select
+to authenticated
+using (auth.uid() = initiator_id or auth.uid() = partner_id);
+
+create policy "relationship_verifications_insert_self"
+on public.relationship_verifications for insert
+to authenticated
+with check (auth.uid() = initiator_id);
