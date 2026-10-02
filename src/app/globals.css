@@ -1,0 +1,269 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: #f8f6f2;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #211d1a;
+  background:
+    radial-gradient(circle at top left, rgba(245, 210, 194, 0.45), transparent 30%),
+    #f8f6f2;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.shell {
+  min-height: 100vh;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 7vw;
+}
+
+.brand {
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.navLinks {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  color: #665f5a;
+  font-size: 0.94rem;
+}
+
+.primaryButton,
+.secondaryButton {
+  border-radius: 999px;
+  padding: 13px 20px;
+  border: 1px solid #211d1a;
+  font-weight: 700;
+}
+
+.primaryButton {
+  background: #211d1a;
+  color: white;
+}
+
+.secondaryButton {
+  background: transparent;
+}
+
+.hero {
+  width: min(1160px, 86vw);
+  margin: 50px auto 0;
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.eyebrow {
+  display: inline-flex;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: #efe5dc;
+  font-size: 0.83rem;
+  font-weight: 700;
+  color: #715c4f;
+  margin-bottom: 20px;
+}
+
+.hero h1 {
+  font-size: clamp(3rem, 7vw, 6.3rem);
+  line-height: 0.92;
+  letter-spacing: -0.07em;
+  margin: 0;
+  max-width: 760px;
+}
+
+.hero p {
+  color: #655d57;
+  font-size: 1.08rem;
+  line-height: 1.7;
+  max-width: 620px;
+  margin: 28px 0;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.phoneCard {
+  border-radius: 36px;
+  padding: 20px;
+  background: #201d1a;
+  box-shadow: 0 22px 70px rgba(34, 26, 22, 0.15);
+  max-width: 440px;
+  justify-self: center;
+}
+
+.profileCard {
+  overflow: hidden;
+  border-radius: 28px;
+  background: white;
+}
+
+.profilePhoto {
+  min-height: 380px;
+  background:
+    linear-gradient(to top, rgba(15, 12, 10, 0.7), rgba(15, 12, 10, 0.05)),
+    linear-gradient(135deg, #cab4a7, #efe1d6);
+  display: flex;
+  align-items: flex-end;
+  padding: 26px;
+  color: white;
+}
+
+.profilePhoto h2 {
+  font-size: 2.2rem;
+  margin: 0 0 6px;
+}
+
+.profileDetails {
+  padding: 24px;
+}
+
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pill {
+  background: #f2ede8;
+  border-radius: 999px;
+  padding: 9px 12px;
+  font-size: 0.82rem;
+}
+
+.matchReason {
+  border-top: 1px solid #ece6e1;
+  margin-top: 20px;
+  padding-top: 18px;
+  color: #5d5650;
+  line-height: 1.55;
+}
+
+.section {
+  width: min(1160px, 86vw);
+  margin: 110px auto;
+}
+
+.section h2 {
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  letter-spacing: -0.045em;
+  margin-bottom: 14px;
+}
+
+.sectionIntro {
+  color: #6b635d;
+  max-width: 720px;
+  line-height: 1.65;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 34px;
+}
+
+.feature {
+  background: rgba(255,255,255,0.72);
+  border: 1px solid #e9e1da;
+  border-radius: 22px;
+  padding: 24px;
+}
+
+.feature h3 {
+  margin: 15px 0 8px;
+}
+
+.feature p {
+  margin: 0;
+  color: #6b635d;
+  line-height: 1.55;
+  font-size: 0.94rem;
+}
+
+.notice {
+  border-radius: 26px;
+  padding: 28px;
+  background: #2a2522;
+  color: white;
+}
+
+.notice p {
+  color: #ddd3cc;
+  line-height: 1.6;
+}
+
+.footer {
+  width: min(1160px, 86vw);
+  margin: 80px auto 30px;
+  padding-top: 24px;
+  border-top: 1px solid #ddd4cd;
+  color: #746c66;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .navLinks {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero,
+  .section,
+  .footer {
+    width: min(92vw, 680px);
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero h1 {
+    font-size: 3.7rem;
+  }
+
+  .profilePhoto {
+    min-height: 320px;
+  }
+}
