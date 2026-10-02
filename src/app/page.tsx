@@ -9,7 +9,7 @@ export default function HomePage() {
           <a href="#how-it-works">How it works</a>
           <a href="#safety">Safety</a>
           <a href="#compatibility">Compatibility</a>
-          <a className="primaryButton" href="/onboarding">Join</a>
+          <a className="primaryButton" href="/auth">Join</a>
         </div>
       </nav>
 
@@ -22,7 +22,7 @@ export default function HomePage() {
             self-awareness, honest boundaries, and relationships that fit their lives.
           </p>
           <div className="actions">
-            <a className="primaryButton" href="/onboarding">Create your profile</a>
+            <a className="primaryButton" href="/auth">Create your profile</a>
             <a className="secondaryButton" href="#how-it-works">See how matching works</a>
           </div>
         </div>
